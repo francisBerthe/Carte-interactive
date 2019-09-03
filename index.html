@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- META Description -->
+  <meta name="identifier-url" content="http://carte-interactive.francis-berthe.fr/">
+  <meta name="title" content="Carte des Velib de la ville d'Amiens">
+  <meta name="description" content="Retrouvez toutes les informations sur les stations Velib 
+                                    de la ville d'Amiens et réservez un vélo dès maintenant. ">
+  <meta name="author" content=" Berthe Francis">
+  <meta name="publisher" content=" Berthe Francis">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  
+  <!-- Open Graph meta -->
+  <meta property="og:title" content="Carte des Velib de la ville d'Amiens" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="http://carte-interactive.francis-berthe.fr/" />
+  <meta property="og:image" content="http://example.com/image.jpg" />
+  <meta property="og:description" content="Retrouvez toutes les informations sur les stations Velib 
+                                           de la ville d'Amiens et réservez un vélo dès maintenant." />
+  
+  
+ <title>Carte Interactive</title>
+  
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="ico/Favicon2.png"> 
+  <!-- BALISES Link -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <!-- BALISE Font -->
+  <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,600,700,900" rel="stylesheet"> 
+  <!-- BALISE FontAwesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  
+  <!-- BALISE Style -->
+  <link rel="stylesheet" href="css/style.css"> 
+  
+  <!-- LEAFLET -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.4.0/leaflet.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.4.1/MarkerCluster.Default.css">
+  
+
+</head>
+<body>
+                        <!-- HEADER -->
+   
+   <header>
+      <div id="barre-connexion">
+        <div class="compte" >
+            <i class="fas fa-user"></i>
+            <a href=""><p>Mon Compte</p></a> 
+        </div>
+      </div>
+      <div id="menu">
+         <div id="logo">
+             <a href="index.html" target="_blank"><img class="logo-velib" src="css/img/logo.png" alt="logo velib'"></a>
+         </div>
+         <ul class="list-menu">
+             <li class="list">
+                 <a href="">Les tarifs</a>
+             </li>
+             <li class="list">
+                 <a href="">Cartes des stations</a>
+             </li>
+             <li class="list">
+                 <a href="">Contact</a>
+             </li> 
+             <li id="search">
+                 <input type="text" id="name" name="name" size="18" placeholder="Rechercher...">
+                 <a href="" class="search">
+                    <i class="fas fa-search"></i>
+                 </a>  
+             </li>       
+          </ul>
+      </div>
+      <div class="bandeau-image">
+           <img id="image" src="css/img/velib.jpg" alt="Description réservation d'un velib">
+           <div id="text-bandeau">
+                <div class="carre-chiffre">
+                    <p id="numero-change" class="chiffre"></p>
+                </div> 
+                <p id="text-change" class="text-change"></p>
+            </div>
+            <div id="bouton-bandeau">
+                <div id= "bouton-droit" class="bouton-droit">
+                  <i class="fas fa-caret-right"></i>
+                </div>
+                <div id= "bouton-gauche" class="bouton-gauche">
+                  <i class="fas fa-caret-left"></i>
+                </div>
+            </div>
+            <div id="bouton-diaporama" class="bouton-diaporama">
+                <i id="fa-pause" class="fas fa-pause"></i>
+                <i id="fa-play" class="fas fa-play"></i>
+            </div>
+            <div class="gris"></div> 
+        </div>
+  </header>
+     
+     
+     
+                    <!-- SECTION/ Titre & Map -->
+    <section>
+       <div class="titre">
+          <h1 class="reservez">
+             <i class="fas fa-arrow-circle-down"></i>
+             Réservez dès maintenant
+          </h1>
+          <div class="trait-noir"></div>
+          <p class="retrouvez">Retrouvez toutes les informations sur les stations</p>
+       </div>
+       
+                   <!-- SECTION/ Map -->
+        <div class="container">
+           <div class="row">
+             <div class="fond-map col-xl-8 col-lg-7 col-md-12">
+                 <div id="mapid"></div>
+              </div> 
+              <div class="formulaire col-xl-4 col-lg-5 col-md-12">
+                    <h3 class="informations-stations">
+                       <i class="fas fa-info-circle"></i>
+                        Informations Stations
+                    </h3>
+                    <hr class="hr-informations">
+                    
+                    <div class="picto-localisation1 col-10">
+                       <div class="bloc-picto">
+                          <i class="fas fa-map-marker-alt"></i>
+                       </div>
+                       <div>
+                          <h5>Localisation</h5>
+                          <hr>
+                          <p id="text-localisation" class="text-formulaire1 ">Adresse de la station</p>
+                       </div>
+                    </div>
+                    <div class="picto-localisation2 col-10">
+                       <div id="bloc-picto2" class="bloc-picto">
+                           <i class="fas fa-city"></i>
+                       </div>
+                       <div>
+                          <h5>Station</h5>
+                          <hr>
+                          <p id="text-station" class="text-formulaire2">Statut de la station</p>
+                       </div>
+                    </div>
+                    <div class="picto-localisation3 col-10">
+                       <div id="bloc-picto3" class="bloc-picto">
+                           <i id ="icone-bicycle" class="fas fa-bicycle"></i>
+                       </div>
+                       <div>
+                          <h5>Vélos Disponibles</h5>
+                          <hr>
+                          <p id="text-disponibilite" class="text-formulaire2">Nombre de vélo</p>
+                       </div>
+                    </div>
+                    
+                    <div id="fond-formulaire" class="fond-formulaire col-lg-11 col-md-5">
+                        <h4 class="reservation">Réservation</h4>
+                        <hr class="hr-blanc">
+                        <form>
+                               <div class="form-1">
+                                 <h6>* Nom :</h6>
+                                 <input id="input-nom" class="input-info" type="text" name="nom">
+                                 <span id="spanNom" class="span-info"></span>
+                               </div>
+                               <div class="form-2">
+                                 <h6>* Prénom :</h6>
+                                 <input id="input-prenom" class="input-info" type="text" name="prenom">
+                                 <span id="spanPrenom" class="span-info"></span>
+                               </div>
+                               <input  type="button" id="bouton-reserver" class="bouton-style" value="Réserver">
+                               <span id="formulaire-text"></span>
+                        </form>
+                    </div>
+                    <div id="fond-canvas" class="fond-canvas col-lg-11 col-md-5">
+                        <h4 class="reservation">Réservation</h4>
+                        <hr class="hr-blanc">
+                        <form>
+                            <div id="bloc-canvas">
+                                <p class="texte-canvas">Confirmer la réservation avec votre signature.</p>
+                                <canvas id="canvas" class="canvas"></canvas>
+                                <button id="effacer" class="reset">Effacer</button>
+                            </div>
+                            <input id="bouton-confirmation" class="bouton-style2" type="button"   value="Confirmer">
+                        </form>
+                    </div>
+                </div>
+             </div>
+        </div>
+        <div class="container" id="bloc-time">
+            <div class="row">
+               <div id="timer" class="timer col-xl-4 col-lg-4 col-md-4 col-sm-8 col-11">
+                    <div class="info-haut ">
+                       <i class="fas fa-stopwatch "></i>
+                       <p class="time">Temps restant</p>
+                    </div>
+                    <div>
+                       <p id="chrono" class="chrono"></p>
+                    </div>
+               </div>
+               <div id="message-timer" class="message-timer col-md-8 col-lg-8 col-xl-8 col-12">
+                   <p id="changement-titre"></p>
+               </div>
+            </div>
+         </div>
+    </section>
+    
+                    <!-- RESEAUX SOCIAUX -->
+         <ul class="social-medias">
+                <li>
+                    <a href="https://fr-fr.facebook.com/"><i class="fab fa-facebook-f"></i></a>
+                </li>
+                <li class="twitter">
+                    <a href="https://www.google.com/search?client=firefox-b&q=twitter"><i class="fab fa-twitter"></i></a>
+                </li>
+                <li>
+                    <a href="https://plus.google.com/discover"><i class="fab fa-google-plus-g"></i></a>
+                </li>
+          </ul>
+                 
+    
+                    <!--  SECTION/ Bouton UP -->
+         <div id="bouton-up" class="bouton-up">
+            <i class="fas fa-angle-up"></i>
+         </div>
+                    
+                          
+                          <!-- FOOTER -->
+    <footer>
+      <div id="footer-haut">
+          <div class="container ">
+             <div class="row ">
+                 <div class="suivez col-xl-3 col-lg-4 col-5">
+                     <p class="text-suivez" >suivez-nous :</p>
+                     <ul class="footer-social" >
+                         <li>
+                            <a href="https://fr-fr.facebook.com/" target="_blank"><i class="fab fa-facebook-square"></i></a>
+                         </li>
+                         <li>
+                            <a href="https://www.google.com/search?client=firefox-b&q=twitter" target="_blank"><i class="fab fa-twitter-square"></i></a>
+                         </li>
+                         <li>
+                            <a href="https://plus.google.com/discover" target="_blank"><i class="fab fa-google-plus-square"></i></a>
+                         </li>
+                     </ul>
+                 </div>
+             </div>
+          </div>
+       </div>
+       
+       <div class="container col-12 no-gutters">
+          <div class="row">
+              <div class="rights col-12"> 
+                  <p class="copyright"><i>Copyright</i> &#9400; <strong>Carte Interactive (2019)</strong> - All Rights Reserved. | Berthe Francis - <strong>OpenClassRooms</strong> -</p>
+              </div>
+          </div> 
+       </div>   
+     </footer>
+
+
+                 <!-- JQUERY--> 
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous">
+  </script>  
+  
+	
+                 <!-- LEAFLET-->
+<script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet.markercluster@1.3.0/dist/leaflet.markercluster-src.js"></script>
+  
+              
+              
+              <!-- JavaScript/ AJAX -->
+  <script src="ajax.js"></script> 
+              <!-- JavaScript/ Bouton -->
+  <script src="bouton.js"></script> 
+              <!-- JavaScript/ canvas -->
+  <script src="canvas.js"></script> 
+              <!-- JavaScript/ Diapo -->
+  <script src="diapo.js"></script> 
+              <!-- JavaScript/ Map -->
+  <script src="map.js"></script> 
+             <!-- JavaScript/ reservation -->
+  <script src="reservation.js"></script>     
+              <!-- JavaScript/ timer -->
+  <script src="timer.js"></script> 
+              <!-- JavaScript/ Main -->
+  <script src="main.js"></script>
+         
+  
+  
+  </body>
+</html>
